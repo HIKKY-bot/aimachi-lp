@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アイマチ | AI人材 × 中小企業マッチング</title>
+<meta name="description" content="AIスキルを持つ個人と、数万円からAI導入したい中小企業をつなぐマッチングサービス">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Outfit:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans JP', sans-serif; background: #0a0a0f; color: #e8e8f0; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 48px 24px; position: relative; overflow-x: hidden; }
+body::before { content: ''; position: absolute; top: -300px; left: 50%; transform: translateX(-50%); width: 900px; height: 900px; background: radial-gradient(circle, rgba(74,245,196,0.07) 0%, rgba(59,130,246,0.03) 40%, transparent 70%); pointer-events: none; }
+#hero { display: flex; flex-direction: column; align-items: center; animation: fadeUp 0.7s ease; }
+.badge { display: inline-block; background: rgba(74,245,196,0.1); border: 1px solid rgba(74,245,196,0.25); color: #4af5c4; padding: 8px 22px; border-radius: 100px; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 36px; }
+.title { font-family: 'Outfit', 'Noto Sans JP', sans-serif; font-size: clamp(56px, 12vw, 100px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 12px; background: linear-gradient(135deg, #fff 30%, #4af5c4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { font-size: clamp(15px, 3vw, 20px); color: #8888a0; font-weight: 400; margin-bottom: 44px; }
+.desc { max-width: 540px; font-size: 15px; color: #8888a0; line-height: 1.9; margin-bottom: 52px; }
+.desc strong { color: #4af5c4; font-weight: 700; }
+.cta { display: inline-block; background: #4af5c4; color: #0a0a0f; font-size: 16px; font-weight: 700; font-family: inherit; padding: 18px 56px; border-radius: 100px; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 50px rgba(74,245,196,0.3); }
+.cta:hover { transform: translateY(-3px); box-shadow: 0 0 80px rgba(74,245,196,0.45); }
+#formSection { display: none; width: 100%; max-width: 480px; animation: fadeUp 0.5s ease; }
+.logo-sm { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; background: linear-gradient(135deg, #fff 30%, #4af5c4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+.page-sub { color: #8888a0; font-size: 14px; margin-bottom: 32px; }
+.form-card { background: #12121a; border: 1px solid rgba(74,245,196,0.12); border-radius: 24px; padding: 40px 32px; box-shadow: 0 0 60px rgba(74,245,196,0.04); text-align: left; }
+.form-card h2 { font-size: 20px; font-weight: 900; text-align: center; margin-bottom: 4px; }
+.form-card .note { text-align: center; color: #8888a0; font-size: 13px; margin-bottom: 32px; }
+.field { margin-bottom: 22px; }
+.field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.field label .req { color: #f87171; margin-left: 2px; font-size: 11px; }
+.field input, .field textarea { width: 100%; padding: 14px 16px; background: #0a0a0f; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; color: #e8e8f0; font-size: 15px; font-family: inherit; outline: none; transition: border 0.3s; }
+.field input:focus, .field textarea:focus { border-color: #4af5c4; box-shadow: 0 0 0 3px rgba(74,245,196,0.08); }
+.field input::placeholder, .field textarea::placeholder { color: #555568; }
+.field textarea { resize: vertical; min-height: 90px; }
+.radio-row { display: flex; gap: 10px; }
+.radio-row .opt { flex: 1; }
+.radio-row .opt input { display: none; }
+.radio-row .opt label.btn { display: block; text-align: center; padding: 12px 8px; background: #0a0a0f; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 700; transition: all 0.25s; margin-bottom: 0; }
+.radio-row .opt input:checked + label.btn { border-color: #4af5c4; background: rgba(74,245,196,0.08); color: #4af5c4; }
+.radio-row .opt label.btn:hover { border-color: rgba(74,245,196,0.4); }
+.submit-btn { width: 100%; padding: 18px; margin-top: 8px; background: #4af5c4; color: #0a0a0f; font-size: 16px; font-weight: 700; font-family: inherit; border: none; border-radius: 100px; cursor: pointer; transition: all 0.3s; box-shadow: 0 0 40px rgba(74,245,196,0.25); }
+.submit-btn:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(74,245,196,0.4); }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+.error-msg { color: #f87171; font-size: 13px; text-align: center; margin-top: 12px; display: none; }
+.back-link { display: inline-block; margin-top: 24px; color: #8888a0; text-decoration: none; font-size: 14px; cursor: pointer; transition: color 0.2s; }
+.back-link:hover { color: #4af5c4; }
+#successView { display: none; text-align: center; animation: fadeUp 0.5s ease; }
+#successView .check { font-size: 56px; margin-bottom: 16px; }
+#successView h3 { font-size: 20px; font-weight: 900; margin-bottom: 10px; }
+#successView p { color: #8888a0; font-size: 14px; line-height: 1.8; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 500px) { .form-card { padding: 32px 20px; } .radio-row { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div id="hero">
+  <div class="badge">🚀 事前登録受付中</div>
+  <h1 class="title">アイマチ</h1>
+  <p class="subtitle">AI人材 × 中小企業 マッチングサービス</p>
+  <p class="desc">AIスキルを持つ個人と、<strong>数万円からAI導入したい中小企業</strong>をつなぐ。<br>開発会社に300万円払う時代は終わり。<br>あなたのスキルが、誰かのビジネスを変える。</p>
+  <button class="cta" onclick="showForm()">事前登録する（無料）</button>
+</div>
+<div id="formSection">
+  <div class="logo-sm">アイマチ</div>
+  <p class="page-sub">事前登録フォーム</p>
+  <div class="form-card">
+    <h2>📝 30秒で完了</h2>
+    <p class="note">リリース時に優先でご案内します</p>
+    <form id="regForm" novalidate>
+      <div class="field"><label>あなたの立場<span class="req">*必須</span></label><div class="radio-row"><div class="opt"><input type="radio" name="type" id="t1" value="AI人材" required><label for="t1" class="btn">💻 AI人材</label></div><div class="opt"><input type="radio" name="type" id="t2" value="企業"><label for="t2" class="btn">🏢 企業</label></div><div class="opt"><input type="radio" name="type" id="t3" value="両方"><label for="t3" class="btn">🔄 両方</label></div></div></div>
+      <div class="field"><label for="name">お名前（ニックネームOK）<span class="req">*必須</span></label><input type="text" id="name" name="name" placeholder="例：たなか" required></div>
+      <div class="field"><label for="email">メールアドレス<span class="req">*必須</span></label><input type="email" id="email" name="email" placeholder="example@email.com" required></div>
+      <div class="field"><label for="skills">使えるツール・スキル</label><input type="text" id="skills" name="skills" placeholder="例：ChatGPT API, Dify, Make, Python"></div>
+      <div class="field"><label for="interest">興味がある案件・依頼したい内容</label><textarea id="interest" name="interest" placeholder="例：LINE Botの開発 / 社内FAQのAIチャットボット化"></textarea></div>
+      <div class="field"><label for="x_account">X（Twitter）アカウント</label><input type="text" id="x_account" name="x_account" placeholder="@username"></div>
+      <button type="submit" class="submit-btn" id="submitBtn">事前登録する（無料）</button>
+      <div class="error-msg" id="errorMsg"></div>
+    </form>
+  </div>
+  <a class="back-link" onclick="showHero()">← 戻る</a>
+</div>
+<div id="successView">
+  <div class="check">✅</div>
+  <h3>登録ありがとうございます！</h3>
+  <p>リリース時に優先でご案内します。<br>Xでのシェアもぜひお願いします 🙏</p>
+</div>
+<script>
+const GAS_URL='https://script.google.com/macros/s/AKfycbz2Vj-zuGta5OExdOrTvCPAvhw_U6tuXQNsM37oHiFMyxzjwvJrnRpp5TH-PuMa-L9R/exec';
+function showForm(){document.getElementById('hero').style.display='none';document.getElementById('formSection').style.display='block';window.scrollTo(0,0);}
+function showHero(){document.getElementById('formSection').style.display='none';document.getElementById('hero').style.display='flex';window.scrollTo(0,0);}
+document.getElementById('regForm').addEventListener('submit',async function(e){e.preventDefault();const btn=document.getElementById('submitBtn');const errEl=document.getElementById('errorMsg');errEl.style.display='none';const typeSelected=document.querySelector('input[name="type"]:checked');if(!typeSelected){errEl.textContent='立場を選択してください';errEl.style.display='block';return;}const name=document.getElementById('name').value.trim();const email=document.getElementById('email').value.trim();if(!name||!email){errEl.textContent='お名前とメールアドレスは必須です';errEl.style.display='block';return;}if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){errEl.textContent='メールアドレスの形式を確認してください';errEl.style.display='block';return;}btn.disabled=true;btn.textContent='送信中...';const data={type:typeSelected.value,name:name,email:email,skills:document.getElementById('skills').value.trim(),interest:document.getElementById('interest').value.trim(),x_account:document.getElementById('x_account').value.trim(),timestamp:new Date().toLocaleString('ja-JP')};try{await fetch(GAS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});document.getElementById('formSection').style.display='none';document.getElementById('successView').style.display='block';window.scrollTo(0,0);}catch(err){errEl.textContent='送信に失敗しました。もう一度お試しください。';errEl.style.display='block';btn.disabled=false;btn.textContent='事前登録する（無料）';}});
+</script>
+</body>
+</html>
